@@ -26,7 +26,7 @@ export default function Home() {
             Browse docs
           </Link>
           <a
-            href="/registry/button.json"
+            href="/r/button.json"
             className="border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-10 items-center justify-center rounded-md border px-5 text-sm font-medium transition-colors"
           >
             Open registry JSON

@@ -1,16 +1,20 @@
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-type RegistryItem = {
+type RegistryFile = {
+  path: string;
+  type: string;
+};
+
+type RegistryEntry = {
   name: string;
-  type: "registry:component";
-  dependencies: string[];
-  files: Array<{
-    path: string;
-    type: "registry:component";
-    content: string;
-  }>;
+  type: string;
+  title: string;
+  description: string;
+  dependencies?: string[];
+  registryDependencies?: string[];
+  files: RegistryFile[];
 };
 
 type DocsItem = {
@@ -22,12 +26,16 @@ type DocsItem = {
   usageExample: string;
 };
 
+const REGISTRY_NAME = "ui-ecosystem";
+const REGISTRY_HOMEPAGE = "https://ui-ecosystem.dev";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsRoot = path.resolve(__dirname, "..");
-const webRegistryDir = path.join(docsRoot, "styles/base-nova/ui");
-const outputDir = path.join(docsRoot, "public/registry");
+const componentsDir = path.join(docsRoot, "styles/base-nova/ui");
+const registryFile = path.join(docsRoot, "registry.json");
 const contentOutputFile = path.join(docsRoot, "content/components.generated.ts");
+const mdxDir = path.join(docsRoot, "content/docs/components/base");
 
 const dependencyAllowList = new Set([
   "@base-ui/react",
@@ -50,48 +58,129 @@ const dependencyAllowList = new Set([
 ]);
 
 async function main() {
-  await mkdir(outputDir, { recursive: true });
+  await mkdir(mdxDir, { recursive: true });
 
-  const entries = await readdir(webRegistryDir, { withFileTypes: true });
+  const entries = await readdir(componentsDir, { withFileTypes: true });
   const componentFiles = entries
     .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
     .map((entry) => entry.name)
     .sort();
 
-  const generatedFiles: string[] = [];
+  const items: RegistryEntry[] = [];
   const docsItems: DocsItem[] = [];
+  let createdDocs = 0;
 
   for (const fileName of componentFiles) {
-    const absolutePath = path.join(webRegistryDir, fileName);
+    const absolutePath = path.join(componentsDir, fileName);
     const source = await readFile(absolutePath, "utf8");
     const name = fileName.replace(/\.tsx$/, "");
 
     const dependencies = inferDependenciesFromImports(source).sort();
+    const registryDependencies = inferRegistryDependencies(source, name);
+    const docsItem = buildDocsItem(name, source);
+    docsItems.push(docsItem);
 
-    const payload: RegistryItem = {
+    items.push({
       name,
-      type: "registry:component",
-      dependencies,
+      type: "registry:ui",
+      title: docsItem.title,
+      description: docsItem.description,
+      ...(dependencies.length > 0 ? { dependencies } : {}),
+      ...(registryDependencies.length > 0 ? { registryDependencies } : {}),
       files: [
         {
-          path: `src/components/ui/${name}.tsx`,
-          type: "registry:component",
-          content: source,
+          path: `styles/base-nova/ui/${name}.tsx`,
+          type: "registry:ui",
         },
       ],
-    };
+    });
 
-    const outputPath = path.join(outputDir, `${name}.json`);
-    await writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-    generatedFiles.push(path.relative(docsRoot, outputPath));
-
-    docsItems.push(buildDocsItem(name, source));
+    if (await writeComponentDoc(docsItem, dependencies)) {
+      createdDocs += 1;
+    }
   }
 
+  items.push({
+    name: "use-mobile",
+    type: "registry:hook",
+    title: "Use Mobile",
+    description: "Hook that tracks whether the viewport is at a mobile breakpoint.",
+    files: [
+      {
+        path: "hooks/use-mobile.ts",
+        type: "registry:hook",
+      },
+    ],
+  });
+
+  await writeRegistry(items);
   await writeContentManifest(docsItems);
 
-  console.log(`Built ${generatedFiles.length} registry component JSON file(s).`);
+  console.log(`Wrote ${path.relative(docsRoot, registryFile)} with ${items.length} item(s).`);
   console.log(`Generated docs manifest: ${path.relative(docsRoot, contentOutputFile)}`);
+  console.log(`Created ${createdDocs} new MDX doc(s) in ${path.relative(docsRoot, mdxDir)}.`);
+  console.log(`Next: run \`pnpm registry:build\` (shadcn build) to emit public/r/*.json.`);
+}
+
+async function writeRegistry(items: RegistryEntry[]) {
+  const registry = {
+    $schema: "https://ui.shadcn.com/schema/registry.json",
+    name: REGISTRY_NAME,
+    homepage: REGISTRY_HOMEPAGE,
+    items,
+  };
+
+  await writeFile(registryFile, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
+}
+
+async function writeComponentDoc(item: DocsItem, dependencies: string[]): Promise<boolean> {
+  const filePath = path.join(mdxDir, `${item.slug}.mdx`);
+
+  const exists = await access(filePath)
+    .then(() => true)
+    .catch(() => false);
+  if (exists) {
+    return false;
+  }
+
+  const dependencyLine =
+    dependencies.length > 0
+      ? dependencies.map((dependency) => `\`${dependency}\``).join(", ")
+      : "No external dependencies.";
+
+  const content = `---
+title: ${item.title}
+description: ${item.description}
+component: true
+base: base
+---
+
+## Installation
+
+\`\`\`bash
+npx shadcn@latest add ${REGISTRY_HOMEPAGE}/r/${item.registryName}.json
+\`\`\`
+
+The component source is published as a registry payload at
+\`/r/${item.registryName}.json\`.
+
+## Usage
+
+\`\`\`tsx
+${item.importExample}
+\`\`\`
+
+\`\`\`tsx
+${item.usageExample}
+\`\`\`
+
+## Dependencies
+
+${dependencyLine}
+`;
+
+  await writeFile(filePath, content, "utf8");
+  return true;
 }
 
 function buildDocsItem(name: string, source: string): DocsItem {
@@ -168,6 +257,22 @@ function inferDependenciesFromImports(source: string): string[] {
   }
 
   return unique(dependencies);
+}
+
+function inferRegistryDependencies(source: string, self: string): string[] {
+  const deps = new Set<string>();
+
+  for (const match of source.matchAll(/from\s+["']@\/styles\/base-nova\/ui\/([a-z0-9-]+)["']/g)) {
+    if (match[1] && match[1] !== self) {
+      deps.add(match[1]);
+    }
+  }
+
+  if (/from\s+["']@\/hooks\/use-mobile["']/.test(source)) {
+    deps.add("use-mobile");
+  }
+
+  return [...deps].sort();
 }
 
 function normalizePackageName(specifier: string): string {

@@ -5,483 +5,446 @@ export const generatedDocsSections: DocsSection[] = [
   {
     title: "Components",
     items: [
-      {
-        slug: "accordion",
-        title: "Accordion",
-        description: "Accordion component built on Base UI primitives.",
-        registryName: "accordion",
-        importExample:
-          'import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";',
-        usageExample: "<Accordion />",
-      },
-      {
-        slug: "alert-dialog",
-        title: "Alert Dialog",
-        description: "Alert Dialog component built on Base UI primitives.",
-        registryName: "alert-dialog",
-        importExample:
-          'import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";',
-        usageExample: "<AlertDialog />",
-      },
-      {
-        slug: "alert",
-        title: "Alert",
-        description: "Alert component built on Base UI primitives.",
-        registryName: "alert",
-        importExample:
-          'import { Alert, AlertTitle, AlertDescription, AlertAction } from "@/components/ui/alert";',
-        usageExample: "<Alert />",
-      },
-      {
-        slug: "aspect-ratio",
-        title: "Aspect Ratio",
-        description: "Aspect Ratio component built on Base UI primitives.",
-        registryName: "aspect-ratio",
-        importExample: 'import { AspectRatio } from "@/components/ui/aspect-ratio";',
-        usageExample: "<AspectRatio />",
-      },
-      {
-        slug: "avatar",
-        title: "Avatar",
-        description: "Avatar component built on Base UI primitives.",
-        registryName: "avatar",
-        importExample:
-          'import { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarBadge } from "@/components/ui/avatar";',
-        usageExample: "<Avatar />",
-      },
-      {
-        slug: "badge",
-        title: "Badge",
-        description: "Badge component built on Base UI primitives.",
-        registryName: "badge",
-        importExample: 'import { Badge, badgeVariants } from "@/components/ui/badge";',
-        usageExample: "<Badge />",
-      },
-      {
-        slug: "breadcrumb",
-        title: "Breadcrumb",
-        description: "Breadcrumb component built on Base UI primitives.",
-        registryName: "breadcrumb",
-        importExample:
-          'import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from "@/components/ui/breadcrumb";',
-        usageExample: "<Breadcrumb />",
-      },
-      {
-        slug: "button-group",
-        title: "Button Group",
-        description: "Button Group component built on Base UI primitives.",
-        registryName: "button-group",
-        importExample:
-          'import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants } from "@/components/ui/button-group";',
-        usageExample: "<ButtonGroup />",
-      },
-      {
-        slug: "button",
-        title: "Button",
-        description: "Button component built on Base UI primitives.",
-        registryName: "button",
-        importExample: 'import { Button, buttonVariants } from "@/components/ui/button";',
-        usageExample: "<Button />",
-      },
-      {
-        slug: "calendar",
-        title: "Calendar",
-        description: "Calendar component built on Base UI primitives.",
-        registryName: "calendar",
-        importExample: 'import { Calendar, CalendarDayButton } from "@/components/ui/calendar";',
-        usageExample: "<Calendar />",
-      },
-      {
-        slug: "card",
-        title: "Card",
-        description: "Card component built on Base UI primitives.",
-        registryName: "card",
-        importExample:
-          'import { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from "@/components/ui/card";',
-        usageExample: "<Card />",
-      },
-      {
-        slug: "carousel",
-        title: "Carousel",
-        description: "Carousel component built on Base UI primitives.",
-        registryName: "carousel",
-        importExample:
-          'import { CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from "@/components/ui/carousel";',
-        usageExample: "<Carousel />",
-      },
-      {
-        slug: "chart",
-        title: "Chart",
-        description: "Chart component built on Base UI primitives.",
-        registryName: "chart",
-        importExample:
-          'import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle } from "@/components/ui/chart";',
-        usageExample: "<ChartContainer />",
-      },
-      {
-        slug: "checkbox",
-        title: "Checkbox",
-        description: "Checkbox component built on Base UI primitives.",
-        registryName: "checkbox",
-        importExample: 'import { Checkbox } from "@/components/ui/checkbox";',
-        usageExample: "<Checkbox />",
-      },
-      {
-        slug: "collapsible",
-        title: "Collapsible",
-        description: "Collapsible component built on Base UI primitives.",
-        registryName: "collapsible",
-        importExample:
-          'import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";',
-        usageExample: "<Collapsible />",
-      },
-      {
-        slug: "combobox",
-        title: "Combobox",
-        description: "Combobox component built on Base UI primitives.",
-        registryName: "combobox",
-        importExample:
-          'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxCollection, ComboboxEmpty, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, ComboboxTrigger, ComboboxValue, useComboboxAnchor } from "@/components/ui/combobox";',
-        usageExample: "<Combobox />",
-      },
-      {
-        slug: "command",
-        title: "Command",
-        description: "Command component built on Base UI primitives.",
-        registryName: "command",
-        importExample:
-          'import { Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator } from "@/components/ui/command";',
-        usageExample: "<Command />",
-      },
-      {
-        slug: "context-menu",
-        title: "Context Menu",
-        description: "Context Menu component built on Base UI primitives.",
-        registryName: "context-menu",
-        importExample:
-          'import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut, ContextMenuGroup, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuRadioGroup } from "@/components/ui/context-menu";',
-        usageExample: "<ContextMenu />",
-      },
-      {
-        slug: "dialog",
-        title: "Dialog",
-        description: "Dialog component built on Base UI primitives.",
-        registryName: "dialog",
-        importExample:
-          'import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "@/components/ui/dialog";',
-        usageExample: "<Dialog />",
-      },
-      {
-        slug: "direction",
-        title: "Direction",
-        description: "Direction component built on Base UI primitives.",
-        registryName: "direction",
-        importExample:
-          'import { DirectionProvider, useDirection } from "@/components/ui/direction";',
-        usageExample: "<DirectionProvider />",
-      },
-      {
-        slug: "drawer",
-        title: "Drawer",
-        description: "Drawer component built on Base UI primitives.",
-        registryName: "drawer",
-        importExample:
-          'import { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from "@/components/ui/drawer";',
-        usageExample: "<Drawer />",
-      },
-      {
-        slug: "dropdown-menu",
-        title: "Dropdown Menu",
-        description: "Dropdown Menu component built on Base UI primitives.",
-        registryName: "dropdown-menu",
-        importExample:
-          'import { DropdownMenu, DropdownMenuPortal, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from "@/components/ui/dropdown-menu";',
-        usageExample: "<DropdownMenu />",
-      },
-      {
-        slug: "empty",
-        title: "Empty",
-        description: "Empty component built on Base UI primitives.",
-        registryName: "empty",
-        importExample:
-          'import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from "@/components/ui/empty";',
-        usageExample: "<Empty />",
-      },
-      {
-        slug: "field",
-        title: "Field",
-        description: "Field component built on Base UI primitives.",
-        registryName: "field",
-        importExample:
-          'import { Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldLegend, FieldSeparator, FieldSet, FieldContent, FieldTitle } from "@/components/ui/field";',
-        usageExample: "<Field />",
-      },
-      {
-        slug: "hover-card",
-        title: "Hover Card",
-        description: "Hover Card component built on Base UI primitives.",
-        registryName: "hover-card",
-        importExample:
-          'import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";',
-        usageExample: "<HoverCard />",
-      },
-      {
-        slug: "input-group",
-        title: "Input Group",
-        description: "Input Group component built on Base UI primitives.",
-        registryName: "input-group",
-        importExample:
-          'import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea } from "@/components/ui/input-group";',
-        usageExample: "<InputGroup />",
-      },
-      {
-        slug: "input-otp",
-        title: "Input Otp",
-        description: "Input Otp component built on Base UI primitives.",
-        registryName: "input-otp",
-        importExample:
-          'import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";',
-        usageExample: "<InputOTP />",
-      },
-      {
-        slug: "input",
-        title: "Input",
-        description: "Input component built on Base UI primitives.",
-        registryName: "input",
-        importExample: 'import { Input } from "@/components/ui/input";',
-        usageExample: "<Input />",
-      },
-      {
-        slug: "item",
-        title: "Item",
-        description: "Item component built on Base UI primitives.",
-        registryName: "item",
-        importExample:
-          'import { Item, ItemMedia, ItemContent, ItemActions, ItemGroup, ItemSeparator, ItemTitle, ItemDescription, ItemHeader, ItemFooter } from "@/components/ui/item";',
-        usageExample: "<Item />",
-      },
-      {
-        slug: "kbd",
-        title: "Kbd",
-        description: "Kbd component built on Base UI primitives.",
-        registryName: "kbd",
-        importExample: 'import { Kbd, KbdGroup } from "@/components/ui/kbd";',
-        usageExample: "<Kbd />",
-      },
-      {
-        slug: "label",
-        title: "Label",
-        description: "Label component built on Base UI primitives.",
-        registryName: "label",
-        importExample: 'import { Label } from "@/components/ui/label";',
-        usageExample: "<Label />",
-      },
-      {
-        slug: "menubar",
-        title: "Menubar",
-        description: "Menubar component built on Base UI primitives.",
-        registryName: "menubar",
-        importExample:
-          'import { Menubar, MenubarPortal, MenubarMenu, MenubarTrigger, MenubarContent, MenubarGroup, MenubarSeparator, MenubarLabel, MenubarItem, MenubarShortcut, MenubarCheckboxItem, MenubarRadioGroup, MenubarRadioItem, MenubarSub, MenubarSubTrigger, MenubarSubContent } from "@/components/ui/menubar";',
-        usageExample: "<Menubar />",
-      },
-      {
-        slug: "native-select",
-        title: "Native Select",
-        description: "Native Select component built on Base UI primitives.",
-        registryName: "native-select",
-        importExample:
-          'import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from "@/components/ui/native-select";',
-        usageExample: "<NativeSelect />",
-      },
-      {
-        slug: "navigation-menu",
-        title: "Navigation Menu",
-        description: "Navigation Menu component built on Base UI primitives.",
-        registryName: "navigation-menu",
-        importExample:
-          'import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuPositioner } from "@/components/ui/navigation-menu";',
-        usageExample: "<NavigationMenu />",
-      },
-      {
-        slug: "pagination",
-        title: "Pagination",
-        description: "Pagination component built on Base UI primitives.",
-        registryName: "pagination",
-        importExample:
-          'import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";',
-        usageExample: "<Pagination />",
-      },
-      {
-        slug: "popover",
-        title: "Popover",
-        description: "Popover component built on Base UI primitives.",
-        registryName: "popover",
-        importExample:
-          'import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";',
-        usageExample: "<Popover />",
-      },
-      {
-        slug: "progress",
-        title: "Progress",
-        description: "Progress component built on Base UI primitives.",
-        registryName: "progress",
-        importExample:
-          'import { Progress, ProgressTrack, ProgressIndicator, ProgressLabel, ProgressValue } from "@/components/ui/progress";',
-        usageExample: "<Progress />",
-      },
-      {
-        slug: "radio-group",
-        title: "Radio Group",
-        description: "Radio Group component built on Base UI primitives.",
-        registryName: "radio-group",
-        importExample: 'import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";',
-        usageExample: "<RadioGroup />",
-      },
-      {
-        slug: "resizable",
-        title: "Resizable",
-        description: "Resizable component built on Base UI primitives.",
-        registryName: "resizable",
-        importExample:
-          'import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";',
-        usageExample: "<ResizableHandle />",
-      },
-      {
-        slug: "scroll-area",
-        title: "Scroll Area",
-        description: "Scroll Area component built on Base UI primitives.",
-        registryName: "scroll-area",
-        importExample: 'import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";',
-        usageExample: "<ScrollArea />",
-      },
-      {
-        slug: "select",
-        title: "Select",
-        description: "Select component built on Base UI primitives.",
-        registryName: "select",
-        importExample:
-          'import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";',
-        usageExample: "<Select />",
-      },
-      {
-        slug: "separator",
-        title: "Separator",
-        description: "Separator component built on Base UI primitives.",
-        registryName: "separator",
-        importExample: 'import { Separator } from "@/components/ui/separator";',
-        usageExample: "<Separator />",
-      },
-      {
-        slug: "sheet",
-        title: "Sheet",
-        description: "Sheet component built on Base UI primitives.",
-        registryName: "sheet",
-        importExample:
-          'import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription } from "@/components/ui/sheet";',
-        usageExample: "<Sheet />",
-      },
-      {
-        slug: "sidebar",
-        title: "Sidebar",
-        description: "Sidebar component built on Base UI primitives.",
-        registryName: "sidebar",
-        importExample:
-          'import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";',
-        usageExample: "<Sidebar />",
-      },
-      {
-        slug: "skeleton",
-        title: "Skeleton",
-        description: "Skeleton component built on Base UI primitives.",
-        registryName: "skeleton",
-        importExample: 'import { Skeleton } from "@/components/ui/skeleton";',
-        usageExample: "<Skeleton />",
-      },
-      {
-        slug: "slider",
-        title: "Slider",
-        description: "Slider component built on Base UI primitives.",
-        registryName: "slider",
-        importExample: 'import { Slider } from "@/components/ui/slider";',
-        usageExample: "<Slider />",
-      },
-      {
-        slug: "sonner",
-        title: "Sonner",
-        description: "Sonner component built on Base UI primitives.",
-        registryName: "sonner",
-        importExample: 'import { Toaster } from "@/components/ui/sonner";',
-        usageExample: "<Toaster />",
-      },
-      {
-        slug: "spinner",
-        title: "Spinner",
-        description: "Spinner component built on Base UI primitives.",
-        registryName: "spinner",
-        importExample: 'import { Spinner } from "@/components/ui/spinner";',
-        usageExample: "<Spinner />",
-      },
-      {
-        slug: "switch",
-        title: "Switch",
-        description: "Switch component built on Base UI primitives.",
-        registryName: "switch",
-        importExample: 'import { Switch } from "@/components/ui/switch";',
-        usageExample: "<Switch />",
-      },
-      {
-        slug: "table",
-        title: "Table",
-        description: "Table component built on Base UI primitives.",
-        registryName: "table",
-        importExample:
-          'import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from "@/components/ui/table";',
-        usageExample: "<Table />",
-      },
-      {
-        slug: "tabs",
-        title: "Tabs",
-        description: "Tabs component built on Base UI primitives.",
-        registryName: "tabs",
-        importExample:
-          'import { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants } from "@/components/ui/tabs";',
-        usageExample: "<Tabs />",
-      },
-      {
-        slug: "textarea",
-        title: "Textarea",
-        description: "Textarea component built on Base UI primitives.",
-        registryName: "textarea",
-        importExample: 'import { Textarea } from "@/components/ui/textarea";',
-        usageExample: "<Textarea />",
-      },
-      {
-        slug: "toggle-group",
-        title: "Toggle Group",
-        description: "Toggle Group component built on Base UI primitives.",
-        registryName: "toggle-group",
-        importExample:
-          'import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";',
-        usageExample: "<ToggleGroup />",
-      },
-      {
-        slug: "toggle",
-        title: "Toggle",
-        description: "Toggle component built on Base UI primitives.",
-        registryName: "toggle",
-        importExample: 'import { Toggle, toggleVariants } from "@/components/ui/toggle";',
-        usageExample: "<Toggle />",
-      },
-      {
-        slug: "tooltip",
-        title: "Tooltip",
-        description: "Tooltip component built on Base UI primitives.",
-        registryName: "tooltip",
-        importExample:
-          'import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";',
-        usageExample: "<Tooltip />",
-      },
+          {
+                "slug": "accordion",
+                "title": "Accordion",
+                "description": "Accordion component built on Base UI primitives.",
+                "registryName": "accordion",
+                "importExample": "import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from \"@/components/ui/accordion\";",
+                "usageExample": "<Accordion />"
+          },
+          {
+                "slug": "alert-dialog",
+                "title": "Alert Dialog",
+                "description": "Alert Dialog component built on Base UI primitives.",
+                "registryName": "alert-dialog",
+                "importExample": "import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger } from \"@/components/ui/alert-dialog\";",
+                "usageExample": "<AlertDialog />"
+          },
+          {
+                "slug": "alert",
+                "title": "Alert",
+                "description": "Alert component built on Base UI primitives.",
+                "registryName": "alert",
+                "importExample": "import { Alert, AlertTitle, AlertDescription, AlertAction } from \"@/components/ui/alert\";",
+                "usageExample": "<Alert />"
+          },
+          {
+                "slug": "aspect-ratio",
+                "title": "Aspect Ratio",
+                "description": "Aspect Ratio component built on Base UI primitives.",
+                "registryName": "aspect-ratio",
+                "importExample": "import { AspectRatio } from \"@/components/ui/aspect-ratio\";",
+                "usageExample": "<AspectRatio />"
+          },
+          {
+                "slug": "avatar",
+                "title": "Avatar",
+                "description": "Avatar component built on Base UI primitives.",
+                "registryName": "avatar",
+                "importExample": "import { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarBadge } from \"@/components/ui/avatar\";",
+                "usageExample": "<Avatar />"
+          },
+          {
+                "slug": "badge",
+                "title": "Badge",
+                "description": "Badge component built on Base UI primitives.",
+                "registryName": "badge",
+                "importExample": "import { Badge, badgeVariants } from \"@/components/ui/badge\";",
+                "usageExample": "<Badge />"
+          },
+          {
+                "slug": "breadcrumb",
+                "title": "Breadcrumb",
+                "description": "Breadcrumb component built on Base UI primitives.",
+                "registryName": "breadcrumb",
+                "importExample": "import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from \"@/components/ui/breadcrumb\";",
+                "usageExample": "<Breadcrumb />"
+          },
+          {
+                "slug": "button-group",
+                "title": "Button Group",
+                "description": "Button Group component built on Base UI primitives.",
+                "registryName": "button-group",
+                "importExample": "import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants } from \"@/components/ui/button-group\";",
+                "usageExample": "<ButtonGroup />"
+          },
+          {
+                "slug": "button",
+                "title": "Button",
+                "description": "Button component built on Base UI primitives.",
+                "registryName": "button",
+                "importExample": "import { Button, buttonVariants } from \"@/components/ui/button\";",
+                "usageExample": "<Button />"
+          },
+          {
+                "slug": "calendar",
+                "title": "Calendar",
+                "description": "Calendar component built on Base UI primitives.",
+                "registryName": "calendar",
+                "importExample": "import { Calendar, CalendarDayButton } from \"@/components/ui/calendar\";",
+                "usageExample": "<Calendar />"
+          },
+          {
+                "slug": "card",
+                "title": "Card",
+                "description": "Card component built on Base UI primitives.",
+                "registryName": "card",
+                "importExample": "import { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from \"@/components/ui/card\";",
+                "usageExample": "<Card />"
+          },
+          {
+                "slug": "carousel",
+                "title": "Carousel",
+                "description": "Carousel component built on Base UI primitives.",
+                "registryName": "carousel",
+                "importExample": "import { CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from \"@/components/ui/carousel\";",
+                "usageExample": "<Carousel />"
+          },
+          {
+                "slug": "chart",
+                "title": "Chart",
+                "description": "Chart component built on Base UI primitives.",
+                "registryName": "chart",
+                "importExample": "import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle } from \"@/components/ui/chart\";",
+                "usageExample": "<ChartContainer />"
+          },
+          {
+                "slug": "checkbox",
+                "title": "Checkbox",
+                "description": "Checkbox component built on Base UI primitives.",
+                "registryName": "checkbox",
+                "importExample": "import { Checkbox } from \"@/components/ui/checkbox\";",
+                "usageExample": "<Checkbox />"
+          },
+          {
+                "slug": "collapsible",
+                "title": "Collapsible",
+                "description": "Collapsible component built on Base UI primitives.",
+                "registryName": "collapsible",
+                "importExample": "import { Collapsible, CollapsibleTrigger, CollapsibleContent } from \"@/components/ui/collapsible\";",
+                "usageExample": "<Collapsible />"
+          },
+          {
+                "slug": "combobox",
+                "title": "Combobox",
+                "description": "Combobox component built on Base UI primitives.",
+                "registryName": "combobox",
+                "importExample": "import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxCollection, ComboboxEmpty, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, ComboboxTrigger, ComboboxValue, useComboboxAnchor } from \"@/components/ui/combobox\";",
+                "usageExample": "<Combobox />"
+          },
+          {
+                "slug": "command",
+                "title": "Command",
+                "description": "Command component built on Base UI primitives.",
+                "registryName": "command",
+                "importExample": "import { Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator } from \"@/components/ui/command\";",
+                "usageExample": "<Command />"
+          },
+          {
+                "slug": "context-menu",
+                "title": "Context Menu",
+                "description": "Context Menu component built on Base UI primitives.",
+                "registryName": "context-menu",
+                "importExample": "import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut, ContextMenuGroup, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuRadioGroup } from \"@/components/ui/context-menu\";",
+                "usageExample": "<ContextMenu />"
+          },
+          {
+                "slug": "dialog",
+                "title": "Dialog",
+                "description": "Dialog component built on Base UI primitives.",
+                "registryName": "dialog",
+                "importExample": "import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from \"@/components/ui/dialog\";",
+                "usageExample": "<Dialog />"
+          },
+          {
+                "slug": "direction",
+                "title": "Direction",
+                "description": "Direction component built on Base UI primitives.",
+                "registryName": "direction",
+                "importExample": "import { DirectionProvider, useDirection } from \"@/components/ui/direction\";",
+                "usageExample": "<DirectionProvider />"
+          },
+          {
+                "slug": "drawer",
+                "title": "Drawer",
+                "description": "Drawer component built on Base UI primitives.",
+                "registryName": "drawer",
+                "importExample": "import { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from \"@/components/ui/drawer\";",
+                "usageExample": "<Drawer />"
+          },
+          {
+                "slug": "dropdown-menu",
+                "title": "Dropdown Menu",
+                "description": "Dropdown Menu component built on Base UI primitives.",
+                "registryName": "dropdown-menu",
+                "importExample": "import { DropdownMenu, DropdownMenuPortal, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from \"@/components/ui/dropdown-menu\";",
+                "usageExample": "<DropdownMenu />"
+          },
+          {
+                "slug": "empty",
+                "title": "Empty",
+                "description": "Empty component built on Base UI primitives.",
+                "registryName": "empty",
+                "importExample": "import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from \"@/components/ui/empty\";",
+                "usageExample": "<Empty />"
+          },
+          {
+                "slug": "field",
+                "title": "Field",
+                "description": "Field component built on Base UI primitives.",
+                "registryName": "field",
+                "importExample": "import { Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldLegend, FieldSeparator, FieldSet, FieldContent, FieldTitle } from \"@/components/ui/field\";",
+                "usageExample": "<Field />"
+          },
+          {
+                "slug": "hover-card",
+                "title": "Hover Card",
+                "description": "Hover Card component built on Base UI primitives.",
+                "registryName": "hover-card",
+                "importExample": "import { HoverCard, HoverCardTrigger, HoverCardContent } from \"@/components/ui/hover-card\";",
+                "usageExample": "<HoverCard />"
+          },
+          {
+                "slug": "input-group",
+                "title": "Input Group",
+                "description": "Input Group component built on Base UI primitives.",
+                "registryName": "input-group",
+                "importExample": "import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea } from \"@/components/ui/input-group\";",
+                "usageExample": "<InputGroup />"
+          },
+          {
+                "slug": "input-otp",
+                "title": "Input Otp",
+                "description": "Input Otp component built on Base UI primitives.",
+                "registryName": "input-otp",
+                "importExample": "import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from \"@/components/ui/input-otp\";",
+                "usageExample": "<InputOTP />"
+          },
+          {
+                "slug": "input",
+                "title": "Input",
+                "description": "Input component built on Base UI primitives.",
+                "registryName": "input",
+                "importExample": "import { Input } from \"@/components/ui/input\";",
+                "usageExample": "<Input />"
+          },
+          {
+                "slug": "item",
+                "title": "Item",
+                "description": "Item component built on Base UI primitives.",
+                "registryName": "item",
+                "importExample": "import { Item, ItemMedia, ItemContent, ItemActions, ItemGroup, ItemSeparator, ItemTitle, ItemDescription, ItemHeader, ItemFooter } from \"@/components/ui/item\";",
+                "usageExample": "<Item />"
+          },
+          {
+                "slug": "kbd",
+                "title": "Kbd",
+                "description": "Kbd component built on Base UI primitives.",
+                "registryName": "kbd",
+                "importExample": "import { Kbd, KbdGroup } from \"@/components/ui/kbd\";",
+                "usageExample": "<Kbd />"
+          },
+          {
+                "slug": "label",
+                "title": "Label",
+                "description": "Label component built on Base UI primitives.",
+                "registryName": "label",
+                "importExample": "import { Label } from \"@/components/ui/label\";",
+                "usageExample": "<Label />"
+          },
+          {
+                "slug": "menubar",
+                "title": "Menubar",
+                "description": "Menubar component built on Base UI primitives.",
+                "registryName": "menubar",
+                "importExample": "import { Menubar, MenubarPortal, MenubarMenu, MenubarTrigger, MenubarContent, MenubarGroup, MenubarSeparator, MenubarLabel, MenubarItem, MenubarShortcut, MenubarCheckboxItem, MenubarRadioGroup, MenubarRadioItem, MenubarSub, MenubarSubTrigger, MenubarSubContent } from \"@/components/ui/menubar\";",
+                "usageExample": "<Menubar />"
+          },
+          {
+                "slug": "native-select",
+                "title": "Native Select",
+                "description": "Native Select component built on Base UI primitives.",
+                "registryName": "native-select",
+                "importExample": "import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from \"@/components/ui/native-select\";",
+                "usageExample": "<NativeSelect />"
+          },
+          {
+                "slug": "navigation-menu",
+                "title": "Navigation Menu",
+                "description": "Navigation Menu component built on Base UI primitives.",
+                "registryName": "navigation-menu",
+                "importExample": "import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuPositioner } from \"@/components/ui/navigation-menu\";",
+                "usageExample": "<NavigationMenu />"
+          },
+          {
+                "slug": "pagination",
+                "title": "Pagination",
+                "description": "Pagination component built on Base UI primitives.",
+                "registryName": "pagination",
+                "importExample": "import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from \"@/components/ui/pagination\";",
+                "usageExample": "<Pagination />"
+          },
+          {
+                "slug": "popover",
+                "title": "Popover",
+                "description": "Popover component built on Base UI primitives.",
+                "registryName": "popover",
+                "importExample": "import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from \"@/components/ui/popover\";",
+                "usageExample": "<Popover />"
+          },
+          {
+                "slug": "progress",
+                "title": "Progress",
+                "description": "Progress component built on Base UI primitives.",
+                "registryName": "progress",
+                "importExample": "import { Progress, ProgressTrack, ProgressIndicator, ProgressLabel, ProgressValue } from \"@/components/ui/progress\";",
+                "usageExample": "<Progress />"
+          },
+          {
+                "slug": "radio-group",
+                "title": "Radio Group",
+                "description": "Radio Group component built on Base UI primitives.",
+                "registryName": "radio-group",
+                "importExample": "import { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\";",
+                "usageExample": "<RadioGroup />"
+          },
+          {
+                "slug": "resizable",
+                "title": "Resizable",
+                "description": "Resizable component built on Base UI primitives.",
+                "registryName": "resizable",
+                "importExample": "import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from \"@/components/ui/resizable\";",
+                "usageExample": "<ResizableHandle />"
+          },
+          {
+                "slug": "scroll-area",
+                "title": "Scroll Area",
+                "description": "Scroll Area component built on Base UI primitives.",
+                "registryName": "scroll-area",
+                "importExample": "import { ScrollArea, ScrollBar } from \"@/components/ui/scroll-area\";",
+                "usageExample": "<ScrollArea />"
+          },
+          {
+                "slug": "select",
+                "title": "Select",
+                "description": "Select component built on Base UI primitives.",
+                "registryName": "select",
+                "importExample": "import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from \"@/components/ui/select\";",
+                "usageExample": "<Select />"
+          },
+          {
+                "slug": "separator",
+                "title": "Separator",
+                "description": "Separator component built on Base UI primitives.",
+                "registryName": "separator",
+                "importExample": "import { Separator } from \"@/components/ui/separator\";",
+                "usageExample": "<Separator />"
+          },
+          {
+                "slug": "sheet",
+                "title": "Sheet",
+                "description": "Sheet component built on Base UI primitives.",
+                "registryName": "sheet",
+                "importExample": "import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription } from \"@/components/ui/sheet\";",
+                "usageExample": "<Sheet />"
+          },
+          {
+                "slug": "sidebar",
+                "title": "Sidebar",
+                "description": "Sidebar component built on Base UI primitives.",
+                "registryName": "sidebar",
+                "importExample": "import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, useSidebar } from \"@/components/ui/sidebar\";",
+                "usageExample": "<Sidebar />"
+          },
+          {
+                "slug": "skeleton",
+                "title": "Skeleton",
+                "description": "Skeleton component built on Base UI primitives.",
+                "registryName": "skeleton",
+                "importExample": "import { Skeleton } from \"@/components/ui/skeleton\";",
+                "usageExample": "<Skeleton />"
+          },
+          {
+                "slug": "slider",
+                "title": "Slider",
+                "description": "Slider component built on Base UI primitives.",
+                "registryName": "slider",
+                "importExample": "import { Slider } from \"@/components/ui/slider\";",
+                "usageExample": "<Slider />"
+          },
+          {
+                "slug": "sonner",
+                "title": "Sonner",
+                "description": "Sonner component built on Base UI primitives.",
+                "registryName": "sonner",
+                "importExample": "import { Toaster } from \"@/components/ui/sonner\";",
+                "usageExample": "<Toaster />"
+          },
+          {
+                "slug": "spinner",
+                "title": "Spinner",
+                "description": "Spinner component built on Base UI primitives.",
+                "registryName": "spinner",
+                "importExample": "import { Spinner } from \"@/components/ui/spinner\";",
+                "usageExample": "<Spinner />"
+          },
+          {
+                "slug": "switch",
+                "title": "Switch",
+                "description": "Switch component built on Base UI primitives.",
+                "registryName": "switch",
+                "importExample": "import { Switch } from \"@/components/ui/switch\";",
+                "usageExample": "<Switch />"
+          },
+          {
+                "slug": "table",
+                "title": "Table",
+                "description": "Table component built on Base UI primitives.",
+                "registryName": "table",
+                "importExample": "import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from \"@/components/ui/table\";",
+                "usageExample": "<Table />"
+          },
+          {
+                "slug": "tabs",
+                "title": "Tabs",
+                "description": "Tabs component built on Base UI primitives.",
+                "registryName": "tabs",
+                "importExample": "import { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants } from \"@/components/ui/tabs\";",
+                "usageExample": "<Tabs />"
+          },
+          {
+                "slug": "textarea",
+                "title": "Textarea",
+                "description": "Textarea component built on Base UI primitives.",
+                "registryName": "textarea",
+                "importExample": "import { Textarea } from \"@/components/ui/textarea\";",
+                "usageExample": "<Textarea />"
+          },
+          {
+                "slug": "toggle-group",
+                "title": "Toggle Group",
+                "description": "Toggle Group component built on Base UI primitives.",
+                "registryName": "toggle-group",
+                "importExample": "import { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\";",
+                "usageExample": "<ToggleGroup />"
+          },
+          {
+                "slug": "toggle",
+                "title": "Toggle",
+                "description": "Toggle component built on Base UI primitives.",
+                "registryName": "toggle",
+                "importExample": "import { Toggle, toggleVariants } from \"@/components/ui/toggle\";",
+                "usageExample": "<Toggle />"
+          },
+          {
+                "slug": "tooltip",
+                "title": "Tooltip",
+                "description": "Tooltip component built on Base UI primitives.",
+                "registryName": "tooltip",
+                "importExample": "import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from \"@/components/ui/tooltip\";",
+                "usageExample": "<Tooltip />"
+          }
     ],
   },
 ];

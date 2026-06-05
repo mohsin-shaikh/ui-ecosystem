@@ -1,0 +1,29 @@
+---
+title: Menubar
+description: Menubar component built on Base UI primitives.
+component: true
+base: base
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://ui-ecosystem.dev/r/menubar.json
+```
+
+The component source is published as a registry payload at
+`/r/menubar.json`.
+
+## Usage
+
+```tsx
+import { Menubar, MenubarPortal, MenubarMenu, MenubarTrigger, MenubarContent, MenubarGroup, MenubarSeparator, MenubarLabel, MenubarItem, MenubarShortcut, MenubarCheckboxItem, MenubarRadioGroup, MenubarRadioItem, MenubarSub, MenubarSubTrigger, MenubarSubContent } from "@/components/ui/menubar";
+```
+
+```tsx
+<Menubar />
+```
+
+## Dependencies
+
+`@base-ui/react`, `lucide-react`, `react`
