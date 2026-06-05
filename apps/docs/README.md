@@ -1,6 +1,6 @@
 # Docs Workspace
 
-This app hosts the Zuupee UI documentation website and the component registry JSON files.
+This app hosts the ui-ecosystem documentation website and the component registry JSON files.
 
 ## Structure
 

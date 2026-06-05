@@ -106,12 +106,19 @@ const DropdownMenuSeparator = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof Menu.Separator>
 >(({ className, ...props }, ref) => (
-  <Menu.Separator ref={ref} className={cn("my-1 h-px bg-zinc-200/80 dark:bg-zinc-800/90", className)} {...props} />
+  <Menu.Separator
+    ref={ref}
+    className={cn("my-1 h-px bg-zinc-200/80 dark:bg-zinc-800/90", className)}
+    {...props}
+  />
 ));
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
 
 const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span className={cn("ml-auto text-xs tracking-wide text-zinc-500 dark:text-zinc-400", className)} {...props} />
+  <span
+    className={cn("ml-auto text-xs tracking-wide text-zinc-500 dark:text-zinc-400", className)}
+    {...props}
+  />
 );
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
 

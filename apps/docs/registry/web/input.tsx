@@ -45,7 +45,7 @@ const inputStyles = cn(
 );
 
 const labelStyles = cn(
-  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-zinc-500",
+  "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-sm text-zinc-500",
   "transition-[transform,color,top,font-size] duration-200 ease-out",
   "peer-focus:top-3 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-focus:font-medium",
   "peer-data-[filled]:top-3 peer-data-[filled]:-translate-y-0 peer-data-[filled]:text-[11px] peer-data-[filled]:font-medium",
@@ -102,9 +102,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </Field.Label>
         </div>
 
-        {helperText ? <Field.Description className={helperTextStyles}>{helperText}</Field.Description> : null}
+        {helperText ? (
+          <Field.Description className={helperTextStyles}>{helperText}</Field.Description>
+        ) : null}
 
-        <Field.Error className={errorTextStyles}>{errorText ?? "This field is invalid."}</Field.Error>
+        <Field.Error className={errorTextStyles}>
+          {errorText ?? "This field is invalid."}
+        </Field.Error>
       </Field.Root>
     );
   },

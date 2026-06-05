@@ -24,34 +24,52 @@ export default async function ComponentDocsPage({ params }: PageProps) {
   }
 
   return (
-    <main className="container">
-      <Link className="inline-link" href="/docs">
+    <div className="mx-auto max-w-3xl">
+      <Link
+        href="/docs"
+        className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+      >
         ← All components
       </Link>
-      <p className="eyebrow">Component</p>
-      <h1 className="heading">{item.title}</h1>
-      <p className="subtle">{item.description}</p>
 
-      <section className="card">
-        <h2 className="section-heading">Registry</h2>
-        <p className="subtle">
-          Fetch this component as JSON from{" "}
-          <code className="code-inline">{`/registry/${item.registryName}.json`}</code>.
-        </p>
-        <a className="inline-link" href={`/registry/${item.registryName}.json`}>
-          Open registry payload
-        </a>
-      </section>
+      <div className="mt-4 space-y-2">
+        <p className="text-muted-foreground text-sm font-medium">Component</p>
+        <h1 className="text-3xl font-bold tracking-tight">{item.title}</h1>
+        <p className="text-muted-foreground">{item.description}</p>
+      </div>
 
-      <section className="card">
-        <h2 className="section-heading">Import</h2>
-        <pre className="code-block">{item.importExample}</pre>
-      </section>
+      <div className="mt-10 space-y-8">
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">Registry</h2>
+          <p className="text-muted-foreground text-sm">
+            Fetch this component as JSON from{" "}
+            <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-sm">
+              {`/registry/${item.registryName}.json`}
+            </code>
+            .
+          </p>
+          <a
+            href={`/registry/${item.registryName}.json`}
+            className="text-foreground inline-flex text-sm font-medium underline underline-offset-4"
+          >
+            Open registry payload
+          </a>
+        </section>
 
-      <section className="card">
-        <h2 className="section-heading">Usage</h2>
-        <pre className="code-block">{item.usageExample}</pre>
-      </section>
-    </main>
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">Import</h2>
+          <pre className="border-border bg-muted/50 overflow-x-auto rounded-lg border p-4 font-mono text-sm">
+            {item.importExample}
+          </pre>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-semibold">Usage</h2>
+          <pre className="border-border bg-muted/50 overflow-x-auto rounded-lg border p-4 font-mono text-sm">
+            {item.usageExample}
+          </pre>
+        </section>
+      </div>
+    </div>
   );
 }

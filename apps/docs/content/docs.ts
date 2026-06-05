@@ -49,7 +49,8 @@ export const docsSections: DocsSection[] = [
         description: "Form input with label, helper text, and error handling.",
         registryName: "input",
         importExample: `import { Input } from "@/components/ui/input";`,
-        usageExample: '<Input label="Email" name="email" type="email" helperText="We never share your email." />',
+        usageExample:
+          '<Input label="Email" name="email" type="email" helperText="We never share your email." />',
       },
     ],
   },

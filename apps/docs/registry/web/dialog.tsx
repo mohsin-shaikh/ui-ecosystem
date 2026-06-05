@@ -11,11 +11,7 @@ const DialogTrigger = React.forwardRef<
   HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger>
 >(({ className, ...props }, ref) => (
-  <BaseDialog.Trigger
-    ref={ref}
-    className={cn(className)}
-    {...props}
-  />
+  <BaseDialog.Trigger ref={ref} className={cn(className)} {...props} />
 ));
 DialogTrigger.displayName = "DialogTrigger";
 
@@ -30,7 +26,7 @@ const DialogBackdrop = React.forwardRef<
     className={cn(
       "fixed inset-0 z-50 bg-zinc-950/70 backdrop-blur-[2px]",
       "transition-opacity duration-300 ease-out",
-      "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 data-[open]:opacity-100",
+      "data-[ending-style]:opacity-0 data-[open]:opacity-100 data-[starting-style]:opacity-0",
       className,
     )}
     {...props}
@@ -123,7 +119,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <BaseDialog.Title
     ref={ref}
-    className={cn("text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50", className)}
+    className={cn(
+      "text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50",
+      className,
+    )}
     {...props}
   />
 ));
@@ -145,11 +144,7 @@ const DialogClose = React.forwardRef<
   HTMLButtonElement,
   React.ComponentPropsWithoutRef<typeof BaseDialog.Close>
 >(({ className, ...props }, ref) => (
-  <BaseDialog.Close
-    ref={ref}
-    className={cn(className)}
-    {...props}
-  />
+  <BaseDialog.Close ref={ref} className={cn(className)} {...props} />
 ));
 DialogClose.displayName = "DialogClose";
 
