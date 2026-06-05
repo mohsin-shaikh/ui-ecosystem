@@ -2,11 +2,6 @@ import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-type RegistryMetadata = {
-  name: string;
-  dependencies: string[];
-};
-
 type RegistryItem = {
   name: string;
   type: "registry:component";
@@ -18,27 +13,41 @@ type RegistryItem = {
   }>;
 };
 
+type DocsItem = {
+  slug: string;
+  title: string;
+  description: string;
+  registryName: string;
+  importExample: string;
+  usageExample: string;
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsRoot = path.resolve(__dirname, "..");
-const webRegistryDir = path.join(docsRoot, "registry/web");
+const webRegistryDir = path.join(docsRoot, "styles/base-nova/ui");
 const outputDir = path.join(docsRoot, "public/registry");
+const contentOutputFile = path.join(docsRoot, "content/components.generated.ts");
 
 const dependencyAllowList = new Set([
   "@base-ui/react",
+  "class-variance-authority",
   "lucide-react",
   "clsx",
   "tailwind-merge",
+  "tw-animate-css",
+  "recharts",
+  "vaul",
+  "cmdk",
+  "input-otp",
+  "react-resizable-panels",
+  "sonner",
+  "embla-carousel-react",
+  "react-day-picker",
+  "next-themes",
   "react",
   "react-dom",
 ]);
-
-const defaultDependencyMap: Record<string, string[]> = {
-  button: ["@base-ui/react"],
-  dialog: ["@base-ui/react"],
-  "dropdown-menu": ["@base-ui/react"],
-  input: ["@base-ui/react"],
-};
 
 async function main() {
   await mkdir(outputDir, { recursive: true });
@@ -50,76 +59,96 @@ async function main() {
     .sort();
 
   const generatedFiles: string[] = [];
+  const docsItems: DocsItem[] = [];
 
   for (const fileName of componentFiles) {
     const absolutePath = path.join(webRegistryDir, fileName);
     const source = await readFile(absolutePath, "utf8");
-    const fileStem = fileName.replace(/\.tsx$/, "");
+    const name = fileName.replace(/\.tsx$/, "");
 
-    const metadata = parseRegistryMetadata(source) ?? {
-      name: fileStem,
-      dependencies: [],
-    };
-
-    const importDependencies = inferDependenciesFromImports(source);
-    const fileDefaults = defaultDependencyMap[fileStem] ?? [];
-
-    const dependencies = unique([
-      ...metadata.dependencies,
-      ...importDependencies,
-      ...fileDefaults,
-    ]).sort();
+    const dependencies = inferDependenciesFromImports(source).sort();
 
     const payload: RegistryItem = {
-      name: metadata.name,
+      name,
       type: "registry:component",
       dependencies,
       files: [
         {
-          path: `src/components/${metadata.name}.tsx`,
+          path: `src/components/ui/${name}.tsx`,
           type: "registry:component",
           content: source,
         },
       ],
     };
 
-    const outputPath = path.join(outputDir, `${metadata.name}.json`);
+    const outputPath = path.join(outputDir, `${name}.json`);
     await writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
     generatedFiles.push(path.relative(docsRoot, outputPath));
+
+    docsItems.push(buildDocsItem(name, source));
   }
+
+  await writeContentManifest(docsItems);
 
   console.log(`Built ${generatedFiles.length} registry component JSON file(s).`);
-  for (const generatedFile of generatedFiles) {
-    console.log(`- ${generatedFile}`);
-  }
+  console.log(`Generated docs manifest: ${path.relative(docsRoot, contentOutputFile)}`);
 }
 
-function parseRegistryMetadata(source: string): RegistryMetadata | null {
-  const blockMatch = source.match(/\/\*\s*@registry([\s\S]*?)\*\//);
-  if (!blockMatch) {
-    return null;
+function buildDocsItem(name: string, source: string): DocsItem {
+  const title = toTitleCase(name);
+  const exports = parseExports(source);
+  const componentExports = exports.filter((value) => /^[A-Z]/.test(value));
+  const primary =
+    componentExports.find((value) => value === toPascalCase(name)) ?? componentExports[0] ?? title;
+
+  const importNames = exports.length > 0 ? exports.join(", ") : primary;
+  const importExample = `import { ${importNames} } from "@/components/ui/${name}";`;
+  const usageExample = `<${primary} />`;
+
+  return {
+    slug: name,
+    title,
+    description: `${title} component built on Base UI primitives.`,
+    registryName: name,
+    importExample,
+    usageExample,
+  };
+}
+
+function parseExports(source: string): string[] {
+  const names = new Set<string>();
+
+  for (const match of source.matchAll(/export\s*\{([^}]*)\}/g)) {
+    const block = match[1];
+    if (!block) {
+      continue;
+    }
+    for (const token of block.split(",")) {
+      const cleaned = token.trim().replace(/^type\s+/, "");
+      if (!cleaned) {
+        continue;
+      }
+      const parts = cleaned.split(/\s+as\s+/);
+      const exported = (parts[1] ?? parts[0] ?? "").trim();
+      if (/^[A-Za-z_]\w*$/.test(exported)) {
+        names.add(exported);
+      }
+    }
   }
 
-  const block = blockMatch[1];
-  if (!block) {
-    return null;
-  }
-  const nameMatch = block.match(/name:\s*([^\n\r]+)/);
-  const dependenciesMatch = block.match(/dependencies:\s*([^\n\r]+)/);
-
-  const name = nameMatch?.[1]?.trim();
-  if (!name) {
-    return null;
+  for (const match of source.matchAll(/export\s+(?:async\s+)?function\s+([A-Za-z_]\w*)/g)) {
+    if (match[1]) {
+      names.add(match[1]);
+    }
   }
 
-  const dependencies = dependenciesMatch?.[1]
-    ? dependenciesMatch[1]
-        .split(",")
-        .map((token) => token.trim())
-        .filter(Boolean)
-    : [];
+  for (const match of source.matchAll(/export\s+const\s+([A-Za-z_]\w*)/g)) {
+    if (match[1]) {
+      names.add(match[1]);
+    }
+  }
 
-  return { name, dependencies };
+  return [...names];
 }
 
 function inferDependenciesFromImports(source: string): string[] {
@@ -153,6 +182,36 @@ function normalizePackageName(specifier: string): string {
 
   const [pkg] = specifier.split("/");
   return pkg ?? specifier;
+}
+
+async function writeContentManifest(items: DocsItem[]) {
+  const header =
+    "// AUTO-GENERATED by scripts/build-registry.ts. Do not edit by hand.\n" +
+    'import type { DocsSection } from "./docs";\n\n';
+
+  const body =
+    `export const generatedDocsSections: DocsSection[] = [\n` +
+    `  {\n` +
+    `    title: "Components",\n` +
+    `    items: ${JSON.stringify(items, null, 6).replace(/\n/g, "\n    ")},\n` +
+    `  },\n` +
+    `];\n`;
+
+  await writeFile(contentOutputFile, header + body, "utf8");
+}
+
+function toTitleCase(value: string): string {
+  return value
+    .split("-")
+    .map((part) => (part ? part[0]!.toUpperCase() + part.slice(1) : part))
+    .join(" ");
+}
+
+function toPascalCase(value: string): string {
+  return value
+    .split("-")
+    .map((part) => (part ? part[0]!.toUpperCase() + part.slice(1) : part))
+    .join("");
 }
 
 function unique<T>(values: T[]): T[] {
