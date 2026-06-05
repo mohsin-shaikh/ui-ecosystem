@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Docs Workspace
 
-## Getting Started
+This app hosts the Zuupee UI documentation website and the component registry JSON files.
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```txt
+app/
+  page.tsx                 # Landing page
+  docs/page.tsx            # Docs index
+  docs/[slug]/page.tsx     # Component docs pages
+src/
+content/
+  docs.ts                  # Docs metadata and route source
+registry/
+  web/*.tsx                # Registry component source files
+lib/
+  utils.ts                 # Shared utility helpers
+public/
+  registry/*.json          # Generated registry payloads
+scripts/
+  build-registry.ts        # Registry JSON generator
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm --filter docs dev
+pnpm --filter docs build:registry
+pnpm --filter docs build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+`build` runs `build:registry` before `next build`, so docs routes and registry files stay in sync.
 
-## Learn More
+## Registry Flow
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Add or update a component in `registry/web`.
+2. Run `pnpm --filter docs build:registry`.
+3. A matching payload is generated at `public/registry/<component>.json`.
+4. Link to that payload from docs pages under `/docs`.

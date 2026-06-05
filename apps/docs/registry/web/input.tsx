@@ -10,7 +10,8 @@ type FieldRootProps = React.ComponentPropsWithoutRef<typeof Field.Root>;
 type BaseInputProps = React.ComponentPropsWithoutRef<typeof BaseInput>;
 
 export type InputProps = Omit<BaseInputProps, "id" | "name" | "disabled"> &
-  Pick<FieldRootProps, "name" | "disabled" | "required" | "invalid" | "validate"> & {
+  Pick<FieldRootProps, "name" | "disabled" | "invalid" | "validate"> & {
+    required?: boolean;
     label: string;
     helperText?: string;
     errorText?: string;
@@ -84,7 +85,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         name={name}
         disabled={disabled}
         invalid={invalid}
-        required={required}
         validate={validate}
         className={cn(rootStyles, className)}
       >
@@ -93,6 +93,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             placeholder={placeholder ?? " "}
+            required={required}
             className={cn(inputStyles, inputClassName)}
             {...props}
           />

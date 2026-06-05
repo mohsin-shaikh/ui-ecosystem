@@ -21,7 +21,7 @@ type RegistryItem = {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsRoot = path.resolve(__dirname, "..");
-const webRegistryDir = path.join(docsRoot, "src/registry/web");
+const webRegistryDir = path.join(docsRoot, "registry/web");
 const outputDir = path.join(docsRoot, "public/registry");
 
 const dependencyAllowList = new Set([
@@ -101,6 +101,9 @@ function parseRegistryMetadata(source: string): RegistryMetadata | null {
   }
 
   const block = blockMatch[1];
+  if (!block) {
+    return null;
+  }
   const nameMatch = block.match(/name:\s*([^\n\r]+)/);
   const dependenciesMatch = block.match(/dependencies:\s*([^\n\r]+)/);
 
@@ -149,7 +152,7 @@ function normalizePackageName(specifier: string): string {
   }
 
   const [pkg] = specifier.split("/");
-  return pkg;
+  return pkg ?? specifier;
 }
 
 function unique<T>(values: T[]): T[] {
