@@ -1,9 +1,12 @@
 import { FieldGroup, Switch, Text, TextInput } from "@expo/ui";
 import { useState } from "react";
 
+import { useMutedTextStyle } from "../use-muted-text-style";
+
 export function ProfileScreen() {
   const [notifications, setNotifications] = useState(true);
   const [marketing, setMarketing] = useState(false);
+  const mutedTextStyle = useMutedTextStyle({ fontSize: 14 });
 
   return (
     <FieldGroup>
@@ -37,7 +40,7 @@ export function ProfileScreen() {
 
       <FieldGroup.Section title="About" titleUppercase={false}>
         <Text
-          textStyle={{ fontSize: 14, color: "#666" }}
+          textStyle={mutedTextStyle}
           style={{ paddingHorizontal: 16, paddingVertical: 8 }}
         >
           Built with @expo/ui universal components. Settings rows use native

@@ -9,23 +9,30 @@ import {
 } from "@expo/ui";
 import { useState } from "react";
 
-const THEMES = ["system", "light", "dark"] as const;
+import {
+  useSetThemePreference,
+  useThemePreference,
+  type ThemePreference,
+} from "../app-theme";
+import { useMutedTextStyle } from "../use-muted-text-style";
 
 export function ExploreScreen() {
   const [volume, setVolume] = useState(60);
   const [haptics, setHaptics] = useState(true);
-  const [theme, setTheme] = useState<(typeof THEMES)[number]>("system");
+  const theme = useThemePreference();
+  const setTheme = useSetThemePreference();
+  const mutedTextStyle = useMutedTextStyle();
 
   return (
     <ScrollView style={{ padding: 16 }}>
       <Column spacing={20}>
-        <Text textStyle={{ fontSize: 15, color: "#666" }}>
+        <Text textStyle={mutedTextStyle}>
           Native sliders, toggles, and pickers from @expo/ui.
         </Text>
 
         <Column spacing={8}>
           <Text textStyle={{ fontWeight: "600" }}>Volume</Text>
-          <Text textStyle={{ color: "#666" }}>{`${Math.round(volume)}%`}</Text>
+          <Text textStyle={mutedTextStyle}>{`${Math.round(volume)}%`}</Text>
           <Slider
             value={volume}
             onValueChange={setVolume}
@@ -45,7 +52,7 @@ export function ExploreScreen() {
           <Text textStyle={{ fontWeight: "600" }}>Appearance</Text>
           <Picker
             selectedValue={theme}
-            onValueChange={setTheme}
+            onValueChange={(value) => setTheme(value as ThemePreference)}
             appearance="menu"
           >
             <Picker.Item label="System" value="system" />

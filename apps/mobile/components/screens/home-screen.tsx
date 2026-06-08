@@ -3,14 +3,16 @@ import { useRouter } from "expo-router";
 
 import { DEMO_ITEMS } from "../../constants/demo-items";
 import type { TabScreenProps } from "../main-tabs/types";
+import { useMutedTextStyle } from "../use-muted-text-style";
 
 export function HomeScreen({ onSelectTab }: TabScreenProps) {
   const router = useRouter();
+  const mutedTextStyle = useMutedTextStyle();
 
   return (
     <ScrollView style={{ paddingBottom: 24 }}>
       <Column spacing={16} style={{ padding: 16 }}>
-        <Text textStyle={{ fontSize: 15, color: "#666" }}>
+        <Text textStyle={mutedTextStyle}>
           Tap a topic to open its detail screen. Components below use @expo/ui
           native rendering on iOS and Android.
         </Text>

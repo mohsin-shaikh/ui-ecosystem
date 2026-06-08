@@ -1,5 +1,6 @@
-import { Host } from "@expo/ui";
 import type { ReactNode } from "react";
+
+import { ThemedHost } from "./themed-host";
 
 type UiScreenProps = {
   children: ReactNode;
@@ -8,11 +9,8 @@ type UiScreenProps = {
 
 export function UiScreen({ children, fill = true }: UiScreenProps) {
   return (
-    <Host
-      style={fill ? { flex: 1 } : undefined}
-      useViewportSizeMeasurement={fill}
-    >
+    <ThemedHost fill={fill} useViewportSizeMeasurement={fill}>
       {children}
-    </Host>
+    </ThemedHost>
   );
 }

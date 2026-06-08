@@ -4,14 +4,18 @@ import { Stack } from "expo-router/stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { AppThemeProvider } from "../components/app-theme";
+
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <StatusBar style="auto" />
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="detail/[id]" options={{ title: "Detail" }} />
-      </Stack>
+      <AppThemeProvider>
+        <StatusBar style="auto" />
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="detail/[id]" options={{ title: "Detail" }} />
+        </Stack>
+      </AppThemeProvider>
     </SafeAreaProvider>
   );
 }

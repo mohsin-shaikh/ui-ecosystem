@@ -3,6 +3,7 @@ import { StatusBar } from "react-native";
 import {
   Box,
   Column,
+  getMaterialColors,
   Host,
   SegmentedButton,
   SingleChoiceSegmentedButtonRow,
@@ -15,6 +16,7 @@ import {
 } from "@expo/ui/jetpack-compose/modifiers";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { useHostColorScheme, useResolvedColorScheme } from "../app-theme";
 import { ExploreScreen } from "../screens/explore-screen";
 import { HomeScreen } from "../screens/home-screen";
 import { ProfileScreen } from "../screens/profile-screen";
@@ -47,9 +49,17 @@ export function MainTabs() {
   const [selected, setSelected] = useState<TabId>("home");
   const insets = useSafeAreaInsets();
   const topInset = Math.max(insets.top, StatusBar.currentHeight ?? 0);
+  const hostColorScheme = useHostColorScheme();
+  const resolvedColorScheme = useResolvedColorScheme();
+  const colors = getMaterialColors({
+    scheme: hostColorScheme ?? resolvedColorScheme,
+  });
 
   return (
-    <Host style={{ flex: 1 }}>
+    <Host
+      colorScheme={hostColorScheme}
+      style={{ flex: 1, backgroundColor: colors.background }}
+    >
       <Column
         verticalArrangement={{ spacedBy: 0 }}
         modifiers={[

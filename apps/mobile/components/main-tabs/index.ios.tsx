@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Host, TabView } from "@expo/ui/swift-ui";
 import { frame, tabViewStyle } from "@expo/ui/swift-ui/modifiers";
 
+import { useHostColorScheme } from "../app-theme";
 import { ExploreScreen } from "../screens/explore-screen";
 import { HomeScreen } from "../screens/home-screen";
 import { ProfileScreen } from "../screens/profile-screen";
@@ -11,9 +12,14 @@ const fillFrame = frame({ maxWidth: Infinity, maxHeight: Infinity });
 
 export function MainTabs() {
   const [selected, setSelected] = useState<TabId>("home");
+  const hostColorScheme = useHostColorScheme();
 
   return (
-    <Host style={{ flex: 1 }} useViewportSizeMeasurement>
+    <Host
+      colorScheme={hostColorScheme}
+      style={{ flex: 1 }}
+      useViewportSizeMeasurement
+    >
       <TabView
         selection={selected}
         onSelectionChange={(value) => setSelected(value as TabId)}
