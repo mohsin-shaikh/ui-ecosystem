@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["oxfmt", "oxlint", "stylesheet"]
+  "cSpell.words": [
+    "jetpack",
+    "oxfmt",
+    "oxlint",
+    "stylesheet"
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
 }
