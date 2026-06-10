@@ -1,9 +1,11 @@
 {
   "cSpell.words": [
+    "foojay",
     "jetpack",
     "oxfmt",
     "oxlint",
-    "stylesheet"
+    "stylesheet",
+    "worklets"
   ],
   "java.compile.nullAnalysis.mode": "automatic"
 }
