@@ -5,14 +5,16 @@ import {
   Column,
   getMaterialColors,
   Host,
-  SegmentedButton,
-  SingleChoiceSegmentedButtonRow,
+  Icon,
+  NavigationBar,
+  NavigationBarItem,
   Text,
 } from "@expo/ui/jetpack-compose";
 import {
   fillMaxSize,
   fillMaxWidth,
   padding,
+  weight,
 } from "@expo/ui/jetpack-compose/modifiers";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -22,10 +24,14 @@ import { HomeScreen } from "../screens/home-screen";
 import { ProfileScreen } from "../screens/profile-screen";
 import type { TabId } from "./types";
 
-const tabs: { id: TabId; label: string }[] = [
-  { id: "home", label: "Home" },
-  { id: "explore", label: "Explore" },
-  { id: "profile", label: "Profile" },
+const HOME_ICON = require("../../assets/icons/home.xml");
+const EXPLORE_ICON = require("../../assets/icons/explore.xml");
+const PERSON_ICON = require("../../assets/icons/person.xml");
+
+const tabs: { id: TabId; label: string; icon: number }[] = [
+  { id: "home", label: "Home", icon: HOME_ICON },
+  { id: "explore", label: "Explore", icon: EXPLORE_ICON },
+  { id: "profile", label: "Profile", icon: PERSON_ICON },
 ];
 
 function TabPanel({
@@ -67,25 +73,33 @@ export function MainTabs() {
           padding(insets.left, topInset, insets.right, 0),
         ]}
       >
-        <Box modifiers={[fillMaxWidth(), fillMaxSize()]}>
+        <Box modifiers={[fillMaxWidth(), weight(1)]}>
           <TabPanel tab={selected} onSelectTab={setSelected} />
         </Box>
 
-        <SingleChoiceSegmentedButtonRow
-          modifiers={[fillMaxWidth(), padding(12, 12, 12, 12 + insets.bottom)]}
+        <NavigationBar
+          containerColor={colors.surfaceContainer}
+          modifiers={[fillMaxWidth(), padding(0, 0, 0, insets.bottom)]}
         >
           {tabs.map((tab) => (
-            <SegmentedButton
+            <NavigationBarItem
               key={tab.id}
               selected={selected === tab.id}
               onClick={() => setSelected(tab.id)}
             >
-              <SegmentedButton.Label>
+              <NavigationBarItem.Icon>
+                <Icon
+                  source={tab.icon}
+                  size={24}
+                  contentDescription={tab.label}
+                />
+              </NavigationBarItem.Icon>
+              <NavigationBarItem.Label>
                 <Text>{tab.label}</Text>
-              </SegmentedButton.Label>
-            </SegmentedButton>
+              </NavigationBarItem.Label>
+            </NavigationBarItem>
           ))}
-        </SingleChoiceSegmentedButtonRow>
+        </NavigationBar>
       </Column>
     </Host>
   );

@@ -3,6 +3,7 @@ import {
   Checkbox,
   Column,
   Picker,
+  Row,
   ScrollView,
   Slider,
   Text,
@@ -14,7 +15,7 @@ import {
   useThemePreference,
   type ThemePreference,
 } from "../app-theme";
-import { useMutedTextStyle } from "../use-muted-text-style";
+import { useMutedTextStyle, usePrimaryTextStyle } from "../use-muted-text-style";
 
 export function ExploreScreen() {
   const [volume, setVolume] = useState(60);
@@ -22,6 +23,8 @@ export function ExploreScreen() {
   const theme = useThemePreference();
   const setTheme = useSetThemePreference();
   const mutedTextStyle = useMutedTextStyle();
+  const primaryTextStyle = usePrimaryTextStyle();
+  const headingTextStyle = usePrimaryTextStyle({ fontWeight: "600" });
 
   return (
     <ScrollView style={{ padding: 16 }}>
@@ -31,7 +34,7 @@ export function ExploreScreen() {
         </Text>
 
         <Column spacing={8}>
-          <Text textStyle={{ fontWeight: "600" }}>Volume</Text>
+          <Text textStyle={headingTextStyle}>Volume</Text>
           <Text textStyle={mutedTextStyle}>{`${Math.round(volume)}%`}</Text>
           <Slider
             value={volume}
@@ -42,14 +45,25 @@ export function ExploreScreen() {
           />
         </Column>
 
-        <Checkbox
-          label="Enable haptic feedback"
-          value={haptics}
-          onValueChange={setHaptics}
-        />
+        {process.env.EXPO_OS === "android" ? (
+          <Row
+            alignment="center"
+            spacing={8}
+            onPress={() => setHaptics((current) => !current)}
+          >
+            <Checkbox value={haptics} onValueChange={setHaptics} />
+            <Text textStyle={primaryTextStyle}>Enable haptic feedback</Text>
+          </Row>
+        ) : (
+          <Checkbox
+            label="Enable haptic feedback"
+            value={haptics}
+            onValueChange={setHaptics}
+          />
+        )}
 
         <Column spacing={8}>
-          <Text textStyle={{ fontWeight: "600" }}>Appearance</Text>
+          <Text textStyle={headingTextStyle}>Appearance</Text>
           <Picker
             selectedValue={theme}
             onValueChange={(value) => setTheme(value as ThemePreference)}

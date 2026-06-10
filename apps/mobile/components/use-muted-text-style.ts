@@ -2,23 +2,44 @@ import { getMaterialColors } from "@expo/ui/jetpack-compose";
 
 import { useHostColorScheme, useResolvedColorScheme } from "./app-theme";
 
-type MutedTextStyle = {
+type ThemedTextStyle = {
   fontSize: number;
-  color: string;
+  color?: string;
+  fontWeight?: "400" | "500" | "600" | "700";
 };
 
-export function useMutedTextStyle(
-  overrides?: Partial<MutedTextStyle>,
-): MutedTextStyle {
+function useThemedTextColor(
+  token: "onSurface" | "onSurfaceVariant",
+): string | undefined {
   const hostColorScheme = useHostColorScheme();
   const resolvedColorScheme = useResolvedColorScheme();
 
-  if (process.env.EXPO_OS === "android") {
-    const colors = getMaterialColors({
-      scheme: hostColorScheme ?? resolvedColorScheme,
-    });
-    return { fontSize: 15, color: colors.onSurfaceVariant, ...overrides };
+  if (process.env.EXPO_OS !== "android") {
+    return token === "onSurfaceVariant" ? "#666" : undefined;
   }
 
-  return { fontSize: 15, color: "#666", ...overrides };
+  const colors = getMaterialColors({
+    scheme: hostColorScheme ?? resolvedColorScheme,
+  });
+  return colors[token];
+}
+
+export function usePrimaryTextStyle(
+  overrides?: Partial<ThemedTextStyle>,
+): ThemedTextStyle {
+  return {
+    fontSize: 16,
+    color: useThemedTextColor("onSurface"),
+    ...overrides,
+  };
+}
+
+export function useMutedTextStyle(
+  overrides?: Partial<ThemedTextStyle>,
+): ThemedTextStyle {
+  return {
+    fontSize: 15,
+    color: useThemedTextColor("onSurfaceVariant"),
+    ...overrides,
+  };
 }
