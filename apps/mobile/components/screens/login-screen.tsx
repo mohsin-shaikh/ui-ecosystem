@@ -1,21 +1,40 @@
-import { Button, Column, FieldGroup, ScrollView, Text, TextInput } from "@expo/ui";
+import { Button, Column, FieldGroup, Text } from "@expo/ui";
 import { useRouter } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
+import { FormTextInput } from "@/components/form-text-input";
+import { UiScreen } from "@/components/ui-screen";
 import {
   useMutedTextStyle,
   usePrimaryTextStyle,
-} from "../use-muted-text-style";
+} from "@/components/use-muted-text-style";
+import { useAuthStore } from "@/lib/auth/auth-store";
 
 export function LoginScreen() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const login = useAuthStore((state) => state.login);
+  const [email, setEmail] = useState("user@example.com");
+  const [password, setPassword] = useState("password");
   const [error, setError] = useState<string | null>(null);
   const mutedTextStyle = useMutedTextStyle();
   const titleTextStyle = usePrimaryTextStyle({
     fontSize: 28,
     fontWeight: "700",
+  });
+
+  const mutation = useMutation({
+    mutationFn: () => login(email.trim(), password),
+    onSuccess: () => {
+      setError(null);
+
+      if (useAuthStore.getState().otpChallenge) {
+        router.push("/verify-otp");
+      }
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Log in failed.");
+    },
   });
 
   const handleLogin = () => {
@@ -24,32 +43,33 @@ export function LoginScreen() {
       return;
     }
 
-    setError(null);
-    router.replace("/");
+    mutation.mutate();
   };
 
   return (
-    <ScrollView style={{ padding: 16 }}>
-      <Column spacing={24}>
+    <UiScreen>
+      <Column spacing={24} style={{ padding: 16 }}>
         <Column spacing={8}>
           <Text textStyle={titleTextStyle}>Welcome back</Text>
           <Text textStyle={mutedTextStyle}>
-            Sign in to continue to your account.
+            Sign in to continue. Try user@example.com / password or
+            admin@example.com / password (OTP: 123456).
           </Text>
         </Column>
 
         <FieldGroup>
           <FieldGroup.Section title="Account">
-            <TextInput
+            <FormTextInput
               placeholder="Email"
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
               autoComplete="email"
               returnKeyType="next"
+              defaultValue={email}
               onChangeText={setEmail}
             />
-            <TextInput
+            <FormTextInput
               placeholder="Password"
               secureTextEntry
               autoCapitalize="none"
@@ -57,6 +77,7 @@ export function LoginScreen() {
               autoComplete="password"
               returnKeyType="done"
               onSubmitEditing={handleLogin}
+              defaultValue={password}
               onChangeText={setPassword}
             />
           </FieldGroup.Section>
@@ -65,14 +86,27 @@ export function LoginScreen() {
         {error ? <Text textStyle={mutedTextStyle}>{error}</Text> : null}
 
         <Column spacing={12}>
-          <Button label="Log in" onPress={handleLogin} />
+          <Button
+            label={mutation.isPending ? "Signing in..." : "Log in"}
+            onPress={handleLogin}
+          />
+          <Button
+            label="Forgot password?"
+            variant="text"
+            onPress={() => router.push("/forgot-password")}
+          />
           <Button
             label="Create an account"
             variant="text"
             onPress={() => router.push("/signup")}
           />
+          <Button
+            label="Terms of Service"
+            variant="text"
+            onPress={() => router.push("/terms")}
+          />
         </Column>
       </Column>
-    </ScrollView>
+    </UiScreen>
   );
 }

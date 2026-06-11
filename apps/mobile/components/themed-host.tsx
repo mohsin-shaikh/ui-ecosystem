@@ -10,6 +10,7 @@ type ThemedHostProps = {
   fill?: boolean;
   style?: ViewStyle;
   useViewportSizeMeasurement?: boolean;
+  matchContents?: boolean | { vertical?: boolean; horizontal?: boolean };
 };
 
 export function ThemedHost({
@@ -17,6 +18,7 @@ export function ThemedHost({
   fill = true,
   style,
   useViewportSizeMeasurement,
+  matchContents,
 }: ThemedHostProps) {
   const hostColorScheme = useHostColorScheme();
   const resolvedColorScheme = useResolvedColorScheme();
@@ -35,6 +37,7 @@ export function ThemedHost({
         ...(backgroundColor ? { backgroundColor } : undefined),
         ...style,
       }}
+      matchContents={matchContents}
       useViewportSizeMeasurement={useViewportSizeMeasurement ?? false}
     >
       {children}

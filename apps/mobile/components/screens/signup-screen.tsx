@@ -1,14 +1,19 @@
-import { Button, Column, FieldGroup, ScrollView, Text, TextInput } from "@expo/ui";
+import { Button, Column, FieldGroup, ScrollView, Text } from "@expo/ui";
 import { useRouter } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
+import { FormTextInput } from "@/components/form-text-input";
+import { UiScreen } from "@/components/ui-screen";
 import {
   useMutedTextStyle,
   usePrimaryTextStyle,
-} from "../use-muted-text-style";
+} from "@/components/use-muted-text-style";
+import { useAuthStore } from "@/lib/auth/auth-store";
 
 export function SignupScreen() {
   const router = useRouter();
+  const signup = useAuthStore((state) => state.signup);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +23,17 @@ export function SignupScreen() {
   const titleTextStyle = usePrimaryTextStyle({
     fontSize: 28,
     fontWeight: "700",
+  });
+
+  const mutation = useMutation({
+    mutationFn: () => signup(email.trim(), password),
+    onSuccess: () => {
+      setError(null);
+      router.push("/verify-otp");
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Sign up failed.");
+    },
   });
 
   const handleSignup = () => {
@@ -31,11 +47,11 @@ export function SignupScreen() {
       return;
     }
 
-    setError(null);
-    router.replace("/");
+    mutation.mutate();
   };
 
   return (
+    <UiScreen>
     <ScrollView style={{ padding: 16 }}>
       <Column spacing={24}>
         <Column spacing={8}>
@@ -47,14 +63,14 @@ export function SignupScreen() {
 
         <FieldGroup>
           <FieldGroup.Section title="Profile">
-            <TextInput
+            <FormTextInput
               placeholder="Full name"
               autoCapitalize="words"
               autoComplete="name"
               returnKeyType="next"
               onChangeText={setName}
             />
-            <TextInput
+            <FormTextInput
               placeholder="Email"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -66,7 +82,7 @@ export function SignupScreen() {
           </FieldGroup.Section>
 
           <FieldGroup.Section title="Security">
-            <TextInput
+            <FormTextInput
               placeholder="Password"
               secureTextEntry
               autoCapitalize="none"
@@ -75,7 +91,7 @@ export function SignupScreen() {
               returnKeyType="next"
               onChangeText={setPassword}
             />
-            <TextInput
+            <FormTextInput
               placeholder="Confirm password"
               secureTextEntry
               autoCapitalize="none"
@@ -91,7 +107,10 @@ export function SignupScreen() {
         {error ? <Text textStyle={mutedTextStyle}>{error}</Text> : null}
 
         <Column spacing={12}>
-          <Button label="Sign up" onPress={handleSignup} />
+          <Button
+            label={mutation.isPending ? "Creating..." : "Sign up"}
+            onPress={handleSignup}
+          />
           <Button
             label="Already have an account?"
             variant="text"
@@ -100,5 +119,6 @@ export function SignupScreen() {
         </Column>
       </Column>
     </ScrollView>
+    </UiScreen>
   );
 }

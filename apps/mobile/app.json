@@ -37,7 +37,9 @@
           }
         }
       ],
-      "./plugins/with-android-java-home"
+      "./plugins/with-android-java-home",
+      "expo-secure-store",
+      "expo-splash-screen"
     ]
   }
 }
